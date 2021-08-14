@@ -24,11 +24,13 @@ Route::prefix('v1')->group(function () {
     Route::post('/verify', [AuthController::class, 'verify']);
     Route::post('/get-otp', [AuthController::class, 'getOtp']);
     Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
+
+    Route::post('/send-notification', [NotificationController::class, 'send']);
     
     
     Route::middleware('auth:sanctum')->group( function () {
 
-       
 
         Route::prefix('user')->group(function () {
             Route::get('/profile', [AuthController::class, 'profile']);
@@ -43,4 +45,6 @@ Route::prefix('v1')->group(function () {
     });
 
 });
+
+
 

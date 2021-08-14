@@ -6,7 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
+use NotificationChannels\ExpoPushNotifications\ExpoChannel;
+use NotificationChannels\ExpoPushNotifications\ExpoMessage;
 class ActivateNotification extends Notification
 {
     use Queueable;
@@ -21,16 +22,6 @@ class ActivateNotification extends Notification
         //
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
 
     /**
      * Get the mail representation of the notification.
@@ -57,5 +48,19 @@ class ActivateNotification extends Notification
         return [
             //
         ];
+    }
+
+
+    public function via($notifiable)
+    {
+        return [ExpoChannel::class];
+    }
+public function toExpoPush($notifiable)
+    {        
+        return ExpoMessage::create()
+        ->badge(1)
+        ->enableSound()
+        ->title("Account activated")
+        ->body("Your account has been activated");
     }
 }

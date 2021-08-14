@@ -55,9 +55,24 @@ class Controller extends BaseController
    
         $otp = rand(pow(10, 3), pow(10, 4)-1);
 
-        // send otp from here
+        $url = "http://66.45.237.70/api.php";
+        $number=$number;
+        $text="Your #FoodGrab OTP code is ".$otp;
+        $data= array(
+        'username'=>env('OTP_USERNAME', '01795514777'),
+        'password'=>env('OTP_PASSWORD', '8ZYGB6TV'),
+        'number'=>"$number",
+        'message'=>"$text"
+        );
 
-
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $smsresult = curl_exec($ch);
+        $p = explode("|",$smsresult);
+        $sendstatus = $p[0];
+        
         return $otp;
     }
 }
