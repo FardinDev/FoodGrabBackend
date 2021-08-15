@@ -19,4 +19,9 @@ class Item extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(MenuCategory::class, 'menu_category_id', 'id');
+    }
 }

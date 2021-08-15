@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NotificationController;
-use App\Http\Controllers\Api\RestaurantContorller;
+use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\LocationController;
 
 
 /*
@@ -38,7 +39,14 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::prefix('restaurant')->group(function () {
-            Route::get('/list', [RestaurantContorller::class, 'index']);
+            Route::get('/list', [RestaurantController::class, 'index']);
+
+            Route::get('/list/recomended', [RestaurantController::class, 'recomended']);
+        });
+        Route::prefix('location')->group(function () {
+            Route::get('/list', [LocationController::class, 'index']);
+
+        
         });
 
 

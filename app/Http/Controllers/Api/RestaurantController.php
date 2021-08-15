@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use App\Models\Item;
 use App\Http\Resources\RestaurantResource;
+use App\Http\Resources\RecomendedItemResource;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
 
-class RestaurantContorller extends Controller
+class RestaurantController extends Controller
 {
     public function index(Request $request){
 
@@ -49,4 +51,21 @@ class RestaurantContorller extends Controller
         return $this->apiSuccessResponse('Restaurant data', $data);
 
     }
+
+    public function recomended(Request $request){
+
+        $items = Item::whereHas('restaurant', function ($query) {
+             $query->where('is_open', 1)->where('status', 1);
+        })->whereHas('category', function ($query) {
+            $query->where('status', 1);
+       })->whereNotNull('image')->where('is_available', 1)->inRandomOrder()->take(5)->get();
+
+        
+
+        return $this->apiSuccessResponse('Recomended data', RecomendedItemResource::collection($items));
+
+    }
+
+
+
 }
