@@ -22,7 +22,15 @@ class RestaurantResource extends JsonResource
             'name' => $this->name,
             'photo' => formatImage($this->banner_image),
             'logo' => formatImage($this->logo),
-            'menu_categories' => [],
+            'address' => $this->address,
+            'location' => [
+                'latitude' => $this->lat,
+                'longitude' => $this->lng,
+            ],
+            'rating' => 4.5,
+            'priceRating' => 'affordable',
+            'duration' => '25 - 40 min',
+            'restaurant_categories' => [1,2],
             'categories' => Category::collection($this->available_categories),
         ];
     }

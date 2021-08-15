@@ -17,6 +17,6 @@ class MenuCategory extends Model
 
 
     public function available_items() {
-        return $this->items()->where('is_available','=', 1)->where('status','=', 1);
+        return $this->items()->where('is_available','=', 1)->where('status','=', 1)->orderBy('order', 'ASC');
     }
 }

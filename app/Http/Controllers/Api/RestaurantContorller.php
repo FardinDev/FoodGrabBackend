@@ -14,7 +14,7 @@ class RestaurantContorller extends Controller
 {
     public function index(Request $request){
 
-        $restaurants = Restaurant::query();
+        $restaurants = Restaurant::with(['available_categories', 'available_categories.available_items'])->where('is_open', 1)->where('status', 1);
 
         if ($request->has('status')) {
             $restaurants->where('status', $request->status);

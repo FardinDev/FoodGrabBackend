@@ -17,9 +17,9 @@ class CategoryItemsResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => formatImage($this->image),
+            'image' => formatImage($this->thumbnail('small')),
             'description' => $this->description,
-            'price' => $this->price,
+            'price' => (int) $this->price,
         ];
     }
 }
