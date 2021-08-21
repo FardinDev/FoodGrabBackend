@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Traits\Spatial;
-
+use TCG\Voyager\Traits\Resizable;
 
 class Restaurant extends Model
 {
-    use HasFactory, Spatial;
+    use HasFactory, Spatial, Resizable;
 
     public function users()
     {

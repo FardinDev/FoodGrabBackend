@@ -17,6 +17,7 @@ class RecomendedItemResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'description' => $this->description,
             'image' => formatImage($this->thumbnail('medium')),
             'price' => (int) $this->price,
             'restaurant' => [

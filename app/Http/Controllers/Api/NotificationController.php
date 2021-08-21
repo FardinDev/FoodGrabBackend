@@ -7,20 +7,20 @@ use App\Models\User;
 
 class NotificationController extends Controller
 {
-    public function send()
+    public function send($id, $title, $body)
     {
 
-        $user = User::find(25);
+        $user = User::find($id);
 
         $key = $user->notification_token;
         $userId = $user->id;
-        $notification = ['title' => 'test', 'body' => 'testbody'];
+        $notification = ['title' => $title, 'body' => $body];
 
         $payload = array(
             'to' => $key,
             'sound' => 'default',
-            'title' => 'Hello From php',
-            'body' => 'You last OTP was '.$user->otp,
+            'title' =>  $title,
+            'body' =>  $body
         );
 
         $curl = curl_init();

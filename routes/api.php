@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\OrderController;
 
 
 /*
@@ -40,13 +41,17 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('restaurant')->group(function () {
             Route::get('/list', [RestaurantController::class, 'index']);
-
             Route::get('/list/recomended', [RestaurantController::class, 'recomended']);
+            Route::post('/get-values', [RestaurantController::class, 'getValues']);
         });
+
         Route::prefix('location')->group(function () {
             Route::get('/list', [LocationController::class, 'index']);
+        });
 
-        
+        Route::prefix('order')->group(function () {
+            Route::get('/list', [OrderController::class, 'index']);
+            Route::post('/create', [OrderController::class, 'create']);
         });
 
 

@@ -23,7 +23,7 @@ class CreateOrderHistoriesTable extends Migration
             $table->foreign('updated_by')->references('id')->on('users');
             $table->string('canceled_by')->nullable();
             $table->text('cancelation_reason')->nullable()->collation('utf8_unicode_ci');
-            $table->bigInteger('canceled_by_id')->unsigned();
+            $table->bigInteger('canceled_by_id')->unsigned()->nullable();;
             $table->foreign('canceled_by_id')->references('id')->on('users');
             $table->timestamps();
         });
