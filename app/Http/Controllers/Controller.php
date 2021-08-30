@@ -72,6 +72,8 @@ class Controller extends BaseController
         $smsresult = curl_exec($ch);
         $p = explode("|",$smsresult);
         $sendstatus = $p[0];
+
+        \Log::debug("smsresult ".$smsresult);
         
         return $otp;
     }

@@ -33,6 +33,7 @@ Route::prefix('v1')->group(function () {
     
     Route::middleware('auth:sanctum')->group( function () {
 
+        Route::post('/check-auth', [AuthController::class, 'checkAuth']);
 
         Route::prefix('user')->group(function () {
             Route::get('/profile', [AuthController::class, 'profile']);

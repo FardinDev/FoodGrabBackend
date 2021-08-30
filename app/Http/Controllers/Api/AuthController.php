@@ -22,6 +22,13 @@ class AuthController extends Controller
         $this->maxOtpCount = env('MAX_OTP_COUNT', 4);
     }
 
+
+    public function checkAuth(Request $request){
+
+        return $this->apiSuccessResponse('Logged in', []);
+
+    }
+
     public function register(Request $request)
     {
 
