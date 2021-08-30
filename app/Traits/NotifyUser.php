@@ -1,4 +1,5 @@
 <?php
+namespace App\Traits;
 
 use App\Models\User;
 use App\Models\Location;
@@ -8,49 +9,13 @@ use App\Models\Restaurant;
 use App\Models\Order;
 use Carbon\Carbon;
 
+trait NotifyUser
+{
+    public function notifyUser(Order $order){
 
-if (! function_exists('adminFields')) {
-    function adminFields() {
-        $fieldList = ['Restaurant', 'Status','Icon'];
-
-        return $fieldList;
-    }
-}
-
-if (! function_exists('formatImage')) {
-    function formatImage($image) {
-        return TCG\Voyager\Facades\Voyager::image($image);
-    }
-}
-
-if (! function_exists('updateOrderStatus')) {
-    function updateOrderStatus($order, $status_id, $canceled_by = null, $cancelation_reason = null, $canceled_by_id = null) {
-        $order->order_status_id = $status_id;
-        $order->save();
-
-        $historyData = [
-                'order_id' => $order->id,
-                'order_status_id' => $status_id,
-                'updated_by' => auth()->user()->id,
-                'canceled_by' => $canceled_by,
-                'cancelation_reason' => $cancelation_reason,
-                'canceled_by_id' => $canceled_by_id,
-        ];
-
-        OrderHistory::create($historyData);
-
-        // oldNotify($order);
-    }
-}
-
-
-if (! function_exists('oldNotify')) {
-    function oldNotify($order) {
-
-        $user = User::find($order->user_id);
-        $restaurant = Restaurant::find($order->restaurant_id);
-        $order = Order::find($order->id);
-        $status = OrderStatus::find($order->order_status_id);
+        $user = $order->user;
+        $restaurant = $order->restaurant;
+        $status = $order->status;
 
 
         $title = 'Order '.$status->name;
@@ -58,6 +23,12 @@ if (! function_exists('oldNotify')) {
         switch ($status->name) {
             case 'Placed':
                 $body = 'Your Order placed at '.$restaurant->name.'. Total amount to be paid is '.$order->grand_total.' Tk. Order Number '.$order->order_number;
+                break;
+            case 'Canceled':
+                $body = 'Sorry Your Order from '.$restaurant->name.' is Canceled. Order Number '.$order->order_number;
+                break;
+            case 'Delivered':
+                $body = 'Your Order Delivered Successfully! Enjoy the food';
                 break;
             
             default:
@@ -100,11 +71,6 @@ if (! function_exists('oldNotify')) {
 
         curl_close($curl);
 
-        // if ($err) {
-        //     echo "cURL Error #:" . $err;
-        // } else {
-        //     echo $response;
-        // }
-
+        \Log::notice($title. " ". $body);
     }
 }
