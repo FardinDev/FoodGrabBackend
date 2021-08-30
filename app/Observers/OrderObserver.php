@@ -21,6 +21,8 @@ class OrderObserver
         // \Log::info("Order Created ". $order->id);
 
         // $this->notifyUser($order);
+        // $this->notifyRestaurant($order);
+        // $this->notifyUser($order);
     }
 
     /**

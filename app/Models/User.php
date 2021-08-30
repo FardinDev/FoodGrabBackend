@@ -54,6 +54,11 @@ class User extends \TCG\Voyager\Models\User
     ];
 
 
+    public function getPhoneAttribute($phone)
+    {
+        return '880' . substr($phone, -10);
+    }
+
     public function restaurants()
     {
         return $this->belongsToMany(Restaurant::class, 'restaurants_users');

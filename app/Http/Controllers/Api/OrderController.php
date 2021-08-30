@@ -89,7 +89,7 @@ class OrderController extends Controller
                 'order_number' =>   '#'.$restaurant->name[0].str_pad($latestOrder->id ?? 1 + 1, 4, "0", STR_PAD_LEFT) .'-'.Str::random(3),
                 'restaurant_id' => $restaurant->id,
                 'user_id' =>   $user->id,
-                'order_status_id' => 1,
+                'order_status_id' => 3,
                 'location_id' => $location->id,
                 'address' => $request->address,
                 'instruction' => $request->instruction,
