@@ -18,6 +18,22 @@ class Order extends Model
 
 
 
+    public function getDiscountLabel()
+    {
+        $label = 0;
+
+        if ($this->is_discounted) {
+            $type = $this->discount_type == 'percent' ? '%' : ' TK';
+
+            $label = ((int) $this->discount_amount ).$type;
+        }
+
+        return $label;
+    }
+    public function itemCount()
+    {
+        return $this->details->sum('quantity');
+    }
     public function details()
     {
         return $this->hasMany(OrderDetails::class, 'order_id', 'id');

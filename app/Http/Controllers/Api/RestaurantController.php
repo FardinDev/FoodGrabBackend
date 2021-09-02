@@ -120,11 +120,16 @@ class RestaurantController extends Controller
             $newAmount = $request->amount - (int) $restaurant->discount_amount;
         }
 
+
+        if ($restaurant->discount_limit && ($request->amount - $newAmount) > $restaurant->discount_limit) {
+
+            $newAmount = $request->amount - $restaurant->discount_limit;
+        }
         
         $data = [
             'discount' => true,
             'discount_label' => $label,
-            'discount_amount' => (int) $restaurant->discount_amount,
+            'discount_amount' => ($request->amount - $newAmount),
             'delivery_charge' => $deliveryCharge,
             'total' => $newAmount + $deliveryCharge,
             'message' => 'You are getting '. ($request->amount - $newAmount) .'Tk discount'

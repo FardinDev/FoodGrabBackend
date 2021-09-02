@@ -17,6 +17,11 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/mail', function () {
+    $order = \App\Models\Order::latest()->first();
+
+    return view('mail.restaurant.order.index', compact('order'));
+});
 
 
 Route::group(['prefix' => 'admin'], function () {

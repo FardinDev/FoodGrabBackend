@@ -75,7 +75,7 @@ class OrderController extends Controller
             $total = collect($cartData)->sum('item_total');
 
             // delivery
-            $deliveryCharge = 30;
+            $deliveryCharge = 10;
 
             // discount
             $discountData = $this->getDiscountData($restaurant, $total);
@@ -158,6 +158,11 @@ class OrderController extends Controller
                 } else if ($restaurant->discount_type == 'amount') {
                     $label = '-' . (int) $restaurant->discount_amount . ' Tk';
                     $newAmount = $total - ($total - (int) $restaurant->discount_amount);
+                }
+
+                if ($restaurant->discount_limit && ($total - $newAmount) > $restaurant->discount_limit) {
+            
+                    $newAmount = $total - $restaurant->discount_limit;
                 }
 
                 $data = [

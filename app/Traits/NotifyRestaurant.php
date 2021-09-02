@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 use App\Models\Order;
+use App\Notifications\OrderPlaced;
 
 
 trait NotifyRestaurant
@@ -34,6 +35,8 @@ trait NotifyRestaurant
             }
 
            \Log::warning([$details]);
+
+           $restaurant->users->first()->notify(new OrderPlaced($order));
         }
 
     }
