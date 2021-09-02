@@ -30,15 +30,16 @@ trait NotifyUser
             case 'Delivered':
                 $body = 'Your Order Delivered Successfully! Enjoy the food';
                 break;
-            
-            default:
+                
+                default:
                 # code...
                 break;
-        }
-
-
-        $key = $user->notification_token;
-
+            }
+            
+            
+            $key = $user->notification_token;
+            
+      
         $payload = array(
             'to' => $key,
             'sound' => 'default',
@@ -47,7 +48,7 @@ trait NotifyUser
         );
 
         $curl = curl_init();
-
+        
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://exp.host/--/api/v2/push/send",
             CURLOPT_RETURNTRANSFER => true,
@@ -71,6 +72,7 @@ trait NotifyUser
 
         curl_close($curl);
 
-        \Log::notice($title. " ". $body);
+        \Log::notice($response);
+        // \Log::notice($title. " ". $body);
     }
 }

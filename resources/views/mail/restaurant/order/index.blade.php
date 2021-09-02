@@ -187,7 +187,7 @@
                                                                         <div style="font-size:12px;line-height:24px">
                                                                             <p
                                                                                 style="margin:0;font-size:16px;line-height:32px">
-                                                                                Call Customer</p>
+                                                                                {{$order->user->phone}}</p>
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -834,4 +834,6 @@
     </table><!-- End -->
 </body>
 
+
+{{$url}}
 </html>

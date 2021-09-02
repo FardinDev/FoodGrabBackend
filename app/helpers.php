@@ -31,7 +31,7 @@ if (! function_exists('updateOrderStatus')) {
         $historyData = [
                 'order_id' => $order->id,
                 'order_status_id' => $status_id,
-                'updated_by' => auth()->user()->id,
+                'updated_by' => auth()->user() ? auth()->user()->id : $order->restaurant->users->first()->id,
                 'canceled_by' => $canceled_by,
                 'cancelation_reason' => $cancelation_reason,
                 'canceled_by_id' => $canceled_by_id,

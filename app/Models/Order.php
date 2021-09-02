@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Order extends Model
 {
     use HasFactory;
@@ -60,6 +60,13 @@ class Order extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')->select(['id', 'name', 'phone']);
+        return $this->belongsTo(User::class, 'user_id', 'id')->select(['id', 'name', 'phone', 'notification_token']);
+    }
+
+    public function scopeOrderOlderThan($query, $interval)
+    {
+        return $query->where('placed_at', '<', Carbon::parse('-5 minutes'));
+
+        
     }
 }
