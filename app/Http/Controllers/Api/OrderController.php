@@ -162,7 +162,7 @@ class OrderController extends Controller
 
                 if ($restaurant->discount_limit && ($total - $newAmount) > $restaurant->discount_limit) {
             
-                    $newAmount = $total - $restaurant->discount_limit;
+                    $newAmount = $total - ($total - $restaurant->discount_limit);
                 }
 
                 $data = [

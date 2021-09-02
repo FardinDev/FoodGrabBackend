@@ -63,7 +63,7 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id', 'id')->select(['id', 'name', 'phone', 'notification_token']);
     }
 
-    public function scopeOrderOlderThan($query, $interval)
+    public function scopeOrderOlderThan($query, $interval = 5)
     {
         return $query->where('placed_at', '<', Carbon::parse('-5 minutes'));
 

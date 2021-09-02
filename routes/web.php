@@ -23,6 +23,8 @@ Route::get('/mail', function () {
     $order = \App\Models\Order::latest()->where('order_status_id', 1)->first();
 
     $url = URL::temporarySignedRoute('order.recieved', now()->addMinutes(10), ['order' => $order]);
+
+
     return view('mail.restaurant.order.index', compact('order', 'url'));
 });
 

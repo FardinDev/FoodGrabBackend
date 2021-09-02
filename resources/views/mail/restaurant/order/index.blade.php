@@ -788,6 +788,48 @@
                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-16"
                         role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%">
                         <tbody>
+                            @if ($order->order_status_id == 1)
+                            <tr>
+                                <td>
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0"
+                                        class="row-content stack" role="presentation"
+                                        style="mso-table-lspace:0;mso-table-rspace:0;background-color:#ececef"
+                                        width="680">
+                                        <tbody>
+                                            <tr>
+                                                <th class="column"
+                                                    style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top"
+                                                    width="100%">
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                        class="button_block" role="presentation"
+                                                        style="mso-table-lspace:0;mso-table-rspace:0" width="100%">
+                                                        <tr>
+                                                            <td
+                                                                style="padding-bottom:10px;padding-left:20px;padding-right:20px;padding-top:10px">
+                                                                <!--[if gte mso 12]><style>div.btnw{display: block !important}</style><div class="btnw" style="display:none"><a:roundrect xmlns:a="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="tel:01795514777" style="v-text-anchor:middle;width:280px;height:32px;" arcsize="16%" stroke="false" fillcolor="#8bdfad"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="font-family:sans-serif;color:#042c04;font-size: 16px;">Call Customer</center></v:textbox></a:roundrect></div><![endif]-->
+                                                                <!--[if !mso]><!--><a href="{{$url}}" target="_blank"
+                                                                    style="padding: 10px; background-color:#8bdfad;border-bottom:0 solid #e17370;border-left:0 solid #e17370;border-radius:5px;border-right:0 solid #e17370;border-top:0 solid #e17370;color:#042c04;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;line-height:200%;width:100%;display:inline-block;text-align:center;text-decoration:none">
+                                                                    <div
+                                                                        style="padding-top:10;padding-right:30px;padding-bottom:10;padding-left:30px">
+                                                                        <div style="font-size:12px;line-height:24px">
+                                                                            <p
+                                                                                style="margin:0;font-size:1.5rem;line-height:32px">
+                                                                                Recieve</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                                <!--<![endif]-->
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            @endif
+                            
                             <tr>
                                 <td>
                                     <table align="center" border="0" cellpadding="0" cellspacing="0"
@@ -825,6 +867,7 @@
                                     </table>
                                 </td>
                             </tr>
+                            
                         </tbody>
                     </table>
                     
@@ -835,5 +878,5 @@
 </body>
 
 
-{{$url}}
+
 </html>

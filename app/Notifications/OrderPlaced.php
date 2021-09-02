@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Order;
+use Illuminate\Support\Facades\URL;
 
 class OrderPlaced extends Notification
 {
@@ -43,9 +44,18 @@ class OrderPlaced extends Notification
      */
     public function toMail($notifiable)
     {
+
+        $url = URL::temporarySignedRoute('order.recieved', now()->addMinutes(10), ['order' => $this->order]);
+
+    
+    
         return (new MailMessage)
         ->subject('Order Number : '. $this->order->order_number)
-        ->view( 'mail.restaurant.order.index', ['order' => $this->order]);
+        ->view( 'mail.restaurant.order.index', [
+            'order' => $this->order,
+            'url' => $url
+         
+        ]);
     }
 
     public function toDatabase($notifiable){
@@ -66,4 +76,6 @@ class OrderPlaced extends Notification
             //
         ];
     }
+
+ 
 }

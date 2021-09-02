@@ -18,6 +18,9 @@ class RestaurantController extends Controller
 
         updateOrderStatus($order, 2);
 
-        return view('success.200', ['message' => 'Recieved Successfully']);
+       
+   
+
+        return view('success.200', ['message' => 'Recieved Successfully', 'order' => $order]);
     }
 }

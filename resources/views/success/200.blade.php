@@ -24,12 +24,44 @@
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center pt-8 sm:justify-start sm:pt-0">
+                <div class="flex items-center pt-8 sm:justify-start sm:pt-0 mb-5">
                     <div class="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
                         200                    </div>
 
                     <div class="ml-4 text-lg text-gray-500 uppercase tracking-wider">
                         {{$message}}                   </div>
+                   
+
+
+                </div>
+                <div class="flex items-center pt-8 sm:justify-start sm:pt-5">
+                    
+        
+                        <div class="ml-4 text-lg text-gray-500 capitalize ">
+
+                            {{$order->restaurant->name}} - {{$order->order_number}}
+                            <br>
+                            <br>
+                            @foreach ($order->details as $key => $item)
+                                {{ ++$key.'. '.$item->item->name.' x '.$item->quantity}}
+                                <br>
+                            @endforeach
+                            ~~~~~~~~~~~~~~~~~~~
+                            <br>
+                            {{'Total: '.$order->grand_total.' TK'}}
+                            <br>
+                            <br>
+                            {{$order->user->name}}
+                            <br>
+                            {{$order->address.', '.$order->location->name}}
+                            <br>
+                            {{'0'.substr( $order->user->phone, -10)}}
+                          
+                        </div>
+                  
+                
+
+
                 </div>
             </div>
         </div>
