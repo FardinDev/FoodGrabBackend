@@ -11,9 +11,44 @@ use Carbon\Carbon;
 
 if (! function_exists('adminFields')) {
     function adminFields() {
-        $fieldList = ['Restaurant', 'Status','Icon'];
+        $fieldList = ['Restaurant', 'Icon', 'Address'];
 
         return $fieldList;
+    }
+}
+
+if (! function_exists('adminFields')) {
+    function adminEditFields() {
+        $fieldList = ['Restaurant', 'Status', 'Icon', 'Customer', 'Address'];
+
+        return $fieldList;
+    }
+}
+
+if (! function_exists('getBadgeClass')) {
+    function getBadgeClass($status) {
+        switch ($status) {
+            case 'Placed':
+                return 'badge-primary';
+                break;
+            case 'Received':
+                return 'badge-warning';
+                break;
+            case 'Pending':
+                return 'badge-secondary';
+                break;
+            case 'Delivered':
+                return 'badge-success';
+                break;
+            case 'Canceled':
+                return 'badge-danger';
+                break;
+                
+                default:
+                # code...
+                return 'badge-secondary';
+                break;
+        }
     }
 }
 
